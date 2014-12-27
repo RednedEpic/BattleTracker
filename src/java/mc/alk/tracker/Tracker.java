@@ -53,8 +53,7 @@ public class Tracker extends MCPlugin{
 		getCommand("battleTracker").setExecutor(new BattleTrackerExecutor());
 		getCommand("btpvp").setExecutor(new TrackerExecutor(getInterface(Defaults.PVP_INTERFACE)));
 		getCommand("btpve").setExecutor(new TrackerExecutor(getInterface(Defaults.PVE_INTERFACE)));
-
-        new BattlePluginsAPI(this);
+                
         PluginUpdater.update(this, bukkitId, this.getFile(), Defaults.AUTO_UPDATE,Defaults.ANNOUNCE_UPDATE);
         BTPluginListener.loadPlugins();
 	}
