@@ -127,7 +127,7 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <configuration>
                     <tasks>
-                        <copy file="target/BattleTracker.java" tofile="../server/plugins/BattleTracker.java"/>
+                        <copy file="target/BattleTracker.jar" tofile="../server/plugins/BattleTracker.jar"/>
                     </tasks>
                 </configuration>
                 <executions>
