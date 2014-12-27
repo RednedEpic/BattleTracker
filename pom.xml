@@ -4,7 +4,7 @@
     <groupId>mc.alk</groupId>
     <artifactId>BattleTracker</artifactId>
     <packaging>jar</packaging>
-    <version>2.5.8.9</version>
+    <version>2.5.8.10</version>
     <name>BattleTracker</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,6 +20,10 @@
             <id>battleplugins-repo</id>
             <url>http://server.battleplugins.com/maven/repository</url>
         </repository>
+        <repository>
+            <id>rainbowcraft-repo</id>
+            <url>http://rainbowcraft.sytes.net/maven/repository/</url>
+        </repository>
     </repositories>
     <!-- Dependencies -->
     <dependencies>
@@ -28,12 +32,6 @@
             <groupId>mc.alk</groupId>
             <artifactId>BattlePluginUpdater</artifactId>
             <version>1.4.1</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>mc.battleplugins</groupId>
-            <artifactId>BattlePluginsAPI</artifactId>
-            <version>1.0.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -122,6 +120,22 @@
                                 </filter>
                             </filters>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <configuration>
+                    <tasks>
+                        <copy file="target/BattleTracker.java" tofile="../server/plugins/BattleTracker.java"/>
+                    </tasks>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
