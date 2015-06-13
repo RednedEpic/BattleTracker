@@ -1,7 +1,0 @@
-A SQL tracker for minecraft.  allows overall stats, tallies, and  individual records.
-
-Versions:
-2.1.2: New getRank function 
-2.1.1: Fix for VersusRecord when teams had names > 32 chars long..
-2.1: Added support for sqlite. Added new methods for the BattleTracker Interface
-
