@@ -371,14 +371,14 @@ public class SignController {
 		if (stat == null)
 			return;
 
-		lines[0] = "&eYour Stats";
-		lines[1] = "[&6"+stat.getRating() +"&0]";
-		int l = (stat.getWins() +"/" + stat.getLosses()).length();
-		lines[2] = l <= 10 ? "&2"+stat.getWins() +"&0/&4" + stat.getLosses() :
+		lines[0] = "&0Your Stats";
+		lines[1] = "&0[&9"+stat.getRating() +"&0]";
+		int len = (stat.getWins() +"/" + stat.getLosses()).length();
+		lines[2] = (len <= 10) ? "&2"+stat.getWins() +"&0/&4" + stat.getLosses() :
 			stat.getWins() +"/" + stat.getLosses();
 		if (lines[2].length() <= 12)
-			lines[2] = "W/L " + lines[2];
-		lines[3] = "Streak: &6" + stat.getStreak() +"";
+			lines[2] = "&0W/L " + lines[2];
+		lines[3] = "&0Streak: &9" + stat.getStreak() +"";
 		for (int i=0;i<lines.length;i++){
 			lines[i] = MessageController.colorChat(lines[i]);
 		}
