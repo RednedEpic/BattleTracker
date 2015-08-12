@@ -129,8 +129,8 @@ pvp:
     - "&6%k&f has riddled &6%d&f with arrows!"
     - "With a well aimed shot &6%k&f punctured &6%d&f's heart!"
   bow:
-    - '&6%k&f feathered &6%d&f with arrows!'
-    - '&6%k&fs arrow pierced through &6%d&f!'
+    - '&6%k&f feathered &6%d&f with arrows from &e%i &5%l'
+    - '&6%k&fs arrow pierced through &6%d&f with &e%i &5%l'
   air:
     - "&6%k&f pummeled &6%d&f with their bare hands!"
     - "&6%d&f was no match for the combat skills of &6%k&f"
