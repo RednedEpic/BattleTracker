@@ -1,6 +1,9 @@
 package mc.alk.tracker.controllers;
 
+import com.dthielke.herochat.Herochat;
+
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
 import java.util.Random;
@@ -14,8 +17,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import com.dthielke.herochat.Herochat;
 
 /**
  *
@@ -133,9 +134,11 @@ public class MessageController {
 		String node=null;
 		List<String> messages = null;
 		String wpnName = null;
+                List<String> wpnLore = null;
 		if (weapon != null){
 			node = "pvp."+ weapon.getType().name().toLowerCase();
 			wpnName = InventoryUtil.getCustomName(weapon);
+                        wpnLore = weapon.getItemMeta().getLore();
 			messages = config.getStringList(node);
 		}
 		if (messages == null || messages.isEmpty()){
@@ -148,7 +151,7 @@ public class MessageController {
 		}
 
 		String msg = messages.get(r.nextInt(messages.size()));
-		return formatMessage(PVP_PREFIX, msg,killer,target, wpnName,null);
+		return formatMessage(PVP_PREFIX, msg,killer,target, wpnName, null, wpnLore);
 	}
 
 	public static String getSpecialMessage(SpecialType type, int nKills, String killer, String target, ItemStack weapon){
@@ -168,20 +171,46 @@ public class MessageController {
 		return formatMessage(PVP_PREFIX, message,killer,target, null, nKills+"");
 	}
 
-	private static String formatMessage(String prefix, String msg, String killer, String target,
-			String item, String times) {
-		try{
-			if (killer != null) msg = StringUtils.replace(msg,"%k",killer);
-			if (target != null) msg = StringUtils.replace(msg,"%d",target);
-			if (item != null) msg = StringUtils.replace(msg,"%i",item.replace('_',' '));
-			if (times != null) msg = StringUtils.replace(msg,"%n",times);
-		} catch(Exception e){
-			System.err.println("Error getting message "+msg);
-			//			for (Object o: varArgs){ System.err.println("argument=" + o);}
-			e.printStackTrace();
-		}
-		return colorChat(prefix+msg);
-	}
+    private static String formatMessage(String prefix, String msg, String killer, String target, String item, String times) {
+        return formatMessage(prefix, msg, killer, target, item, times, new ArrayList<String>());
+    }
+
+    private static String formatMessage(String prefix, String msg, String killer, String target,
+            String item, String times, List<String> lore) {
+        try {
+            if (killer != null) {
+                msg = StringUtils.replace(msg, "%k", killer);
+            } else {
+                msg = StringUtils.replace(msg, "%k", "Unknown killer");
+            }
+            if (target != null) {
+                msg = StringUtils.replace(msg, "%d", target);
+            } else {
+                msg = StringUtils.replace(msg, "%d", "unknown target");
+            }
+            if (item != null) {
+                msg = StringUtils.replace(msg, "%i", item.replace('_', ' '));
+            } else {
+                msg = StringUtils.replace(msg, "%i", "unknown item");
+            }
+            if (times != null) {
+                msg = StringUtils.replace(msg, "%n", times);
+            } else {
+                msg = StringUtils.replace(msg, "%n", "?");
+            }
+            if (lore != null && !lore.isEmpty()) {
+                String slore = StringUtils.join(lore, ", ");
+                msg = StringUtils.replace(msg, "%l", slore);
+            } else {
+                msg = StringUtils.replace(msg, "%l", "???");
+            }
+        } catch (Exception e) {
+            System.err.println("Error getting message " + msg);
+            //			for (Object o: varArgs){ System.err.println("argument=" + o);}
+            e.printStackTrace();
+        }
+        return colorChat(prefix + msg);
+    }
 
 	public static boolean load() {
 		try {
