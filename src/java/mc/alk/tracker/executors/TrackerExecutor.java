@@ -52,7 +52,7 @@ public class TrackerExecutor extends CustomCommandExecutor {
 		for (int i=0;i<min;i++){
 			stat = stats.get(i);
 			sendMessage(sender,"&6"+(i+1)+"&e: &c" + stat.getName()+"&6["+stat.getRating()+"] &eWins(&6"+stat.getWins()+
-					"&e),Losses(&8"+stat.getLosses()+"&e),Streak(&b"+stat.getStreak()+"&e) W/L(&c"+stat.getKDRatio()+"&e)");
+					"&e),Losses(&8"+stat.getLosses()+"&e),Streak(&b"+stat.getStreak()+"&e) W/L(&c"+String.format("%.2f", stat.getKDRatio())+"&e)");
 		}
 		return true;
 	}
@@ -122,7 +122,7 @@ public class TrackerExecutor extends CustomCommandExecutor {
 	protected String getFullStatMsg(Stat stat) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("&5"+stat.getName() +"&6["+stat.getRating()+"] &eWins(&6"+stat.getWins()+"&e),Losses(&8"+stat.getLosses()+
-				"&e),Streak(&b"+stat.getStreak()+"&e),MaxStreak(&7"+stat.getMaxStreak()+"&e) W/L(&c"+stat.getKDRatio()+"&e)");
+				"&e),Streak(&b"+stat.getStreak()+"&e),MaxStreak(&7"+stat.getMaxStreak()+"&e) W/L(&c"+String.format("%.2f", stat.getKDRatio())+"&e)");
 		return sb.toString();
 	}
 
