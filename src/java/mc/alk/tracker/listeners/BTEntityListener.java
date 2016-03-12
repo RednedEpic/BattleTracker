@@ -28,10 +28,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -247,7 +244,8 @@ public class BTEntityListener implements Listener{
 			}
 			event.setDeathMessage(null);
 			UUID wid = l.getWorld().getUID();
-			Player players[] = Bukkit.getOnlinePlayers();
+			Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
+			Player players[] = onlinePlayers.toArray(new Player[onlinePlayers.size()]);
 
 			for (Player p: players){
 				if (wid != p.getLocation().getWorld().getUID()  || p.getLocation().distanceSquared(l) >= Defaults.RADIUS){
