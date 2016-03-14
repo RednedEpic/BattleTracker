@@ -111,7 +111,7 @@ public class BTEntityListener implements Listener{
 				killerEntity = (Player) damager;
 				killer = killerEntity.getName();
 				killerPlayer = true;
-				killingWeapon = killerEntity.getItemInHand();
+				killingWeapon = killerEntity.getItemOnCursor();
 			} else if (damager instanceof Projectile) { /// we have some sort of projectile
 				isMelee = false;
 				Projectile proj = (Projectile) damager;
@@ -119,7 +119,7 @@ public class BTEntityListener implements Listener{
 					killerPlayer = true;
 					killerEntity = (Player) proj.getShooter();
 					killer = killerEntity.getName();
-					killingWeapon = killerEntity.getItemInHand();
+					killingWeapon = killerEntity.getItemOnCursor();
 				} else if (proj.getShooter() != null){ /// projectile shot by some mob, or other source
 					killer = proj.getShooter().getClass().getName();
 				} else {
