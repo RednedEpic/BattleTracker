@@ -121,7 +121,7 @@ public class BTEntityListener implements Listener{
 					killer = killerEntity.getName();
 					killingWeapon = killerEntity.getItemOnCursor();
 				} else if (proj.getShooter() != null){ /// projectile shot by some mob, or other source
-					killer = proj.getShooter().getClass().getName();
+					killer = proj.getShooter().getClass().getSimpleName();
 				} else {
 					killer = UNKNOWN; /// projectile was null?
 				}
