@@ -10,6 +10,7 @@ import mc.alk.tracker.objects.StatType;
 import mc.alk.tracker.objects.exceptions.InvalidSignException;
 import mc.alk.v1r7.util.AutoClearingTimer;
 
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -38,7 +39,7 @@ public class SignListener implements Listener{
             return;
 		final Block block = event.getClickedBlock();
 		final Material type = block.getType();
-		if (!(type.equals(Material.SIGN) || type.equals(Material.SIGN_POST) || type.equals(Material.WALL_SIGN))) {
+		if (!(type.equals(Material.SIGN) || type.equals(Material.LEGACY_SIGN_POST) || type.equals(Material.WALL_SIGN))) {
 			return ;}
 		StatSign ss = signController.getStatSign(event.getClickedBlock().getLocation());
 		if (ss == null)
@@ -50,7 +51,7 @@ public class SignListener implements Listener{
 			timer.put(event.getPlayer().getName());
 			final Location l = block.getLocation();
 			Bukkit.getScheduler().scheduleSyncDelayedTask(Tracker.getSelf(), new Runnable(){
-				@Override
+
 				public void run(){
 					l.getWorld().getBlockAt(l).getState().update(true);
 				}
@@ -63,11 +64,11 @@ public class SignListener implements Listener{
 	public void onBlockBreak(BlockBreakEvent event){
 		final Block block = event.getBlock();
 		final Material type = block.getType();
-		if (!(type.equals(Material.SIGN) || type.equals(Material.SIGN_POST) || type.equals(Material.WALL_SIGN))) {
+		if (!(type.equals(Material.SIGN) || type.equals(Material.LEGACY_SIGN_POST) || type.equals(Material.WALL_SIGN))) {
 			return;}
 		Sign s = (Sign)block.getState();
 		final String l = s.getLine(0);
-		if (l == null || l.isEmpty() || l.charAt(0) != '[')
+		if (l == null || StringUtils.isEmpty(l) || l.charAt(0) != '[')
 			return;
 		signController.removeSignAt(s.getLocation());
 	}
@@ -76,7 +77,7 @@ public class SignListener implements Listener{
 	public void onSignChange(SignChangeEvent event){
 		final Block block = event.getBlock();
 		final Material type = block.getType();
-		if (!(type.equals(Material.SIGN) || type.equals(Material.SIGN_POST) || type.equals(Material.WALL_SIGN))) {
+		if (!(type.equals(Material.SIGN) || type.equals(Material.LEGACY_SIGN_POST) || type.equals(Material.WALL_SIGN))) {
 			return;}
 		StatSign ss;
 		try {
@@ -101,7 +102,7 @@ public class SignListener implements Listener{
 		}
 		signController.addSign(ss);
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Tracker.getSelf(), new Runnable(){
-			@Override
+
 			public void run() {
 				signController.updateSigns();
 				Tracker.getSelf().saveConfig();
@@ -113,8 +114,8 @@ public class SignListener implements Listener{
 		/// Quick check to make sure this is even a stat sign
 		/// make sure first two lines are not null or empty.. line 1 starts with '['
 		if (lines.length < 2 ||
-				lines[0] == null || lines[0].isEmpty() || lines[0].charAt(0) != '[' ||
-				lines[1] == null || lines[1].isEmpty()){
+				lines[0] == null || StringUtils.isEmpty(lines[0]) || lines[0].charAt(0) != '[' ||
+				lines[1] == null || StringUtils.isEmpty(lines[1])){
 			return null;}
 
 		/// find the Sign Type, like top, personal

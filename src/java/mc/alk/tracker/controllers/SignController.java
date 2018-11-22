@@ -7,7 +7,7 @@ import mc.alk.tracker.objects.StatSign;
 import mc.alk.tracker.objects.StatType;
 import mc.alk.util.SignUtil;
 import mc.alk.v1r7.util.SerializerUtil;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -113,7 +113,7 @@ public class SignController {
 			return;
 		/// Sort based on stattype
 		Collections.sort(statsigns, new Comparator<StatSign>(){
-			@Override
+
 			public int compare(StatSign arg0, StatSign arg1) {
 				if (arg0.getStatType() == null && arg1.getStatType() == null) return 0;
 				else if (arg1.getStatType() == null ) return -1;
@@ -232,10 +232,11 @@ public class SignController {
 	}
 
 
+	@SuppressWarnings("deprecation")
 	private void updateSigns(final TrackerInterface ti,
-			final List<StatSign> update, final int max, final StatType type, final int offset) {
+							 final List<StatSign> update, final int max, final StatType type, final int offset) {
 		Bukkit.getScheduler().scheduleAsyncDelayedTask(Tracker.getSelf(), new Runnable(){
-			@Override
+
 			public void run() {
 				List<Stat> toplist= ti.getTopX(type, max * 4);
 				if (toplist != null && !toplist.isEmpty() && Tracker.getSelf().isEnabled()){
@@ -246,7 +247,7 @@ public class SignController {
 		},2L*offset);
 	}
 
-	class UpdateSigns implements Runnable{
+	class UpdateSigns implements Runnable {
 		final String dbName;
 		final List<StatSign> statSignList;
 		final List<Stat> statList;
@@ -257,7 +258,6 @@ public class SignController {
 			this.statList = toplist;
 		}
 
-		@Override
 		public void run() {
 			for (StatSign ss: statSignList){
 				Sign s = getSign(ss.getLocation());
@@ -315,20 +315,20 @@ public class SignController {
 	}
 
 	private boolean breakLine(String line) {
-		return line != null && (!line.isEmpty() && line.startsWith("["));
+		return line != null && (!StringUtils.isEmpty(line) && line.startsWith("["));
 	}
 
 	private Sign getSign(World w, int x, int y, int z) {
 		Block b = w.getBlockAt(x, y, z);
 		Material t = b.getType();
-		return t == Material.SIGN || t == Material.SIGN_POST || t==Material.WALL_SIGN ? (Sign)b.getState(): null;
+		return t == Material.SIGN || t == Material.LEGACY_SIGN_POST || t==Material.WALL_SIGN ? (Sign)b.getState(): null;
 	}
 
 	private Sign getSign(Location l) {
 		if (l == null)
 			return null;
 		Material t = l.getBlock().getType();
-		return t == Material.SIGN || t == Material.SIGN_POST || t==Material.WALL_SIGN ? (Sign)l.getBlock().getState(): null;
+		return t == Material.SIGN || t == Material.LEGACY_SIGN_POST || t==Material.WALL_SIGN ? (Sign)l.getBlock().getState(): null;
 	}
 
 	private Sign getSign(String loc) {
@@ -336,7 +336,7 @@ public class SignController {
 		if (l == null)
 			return null;
 		Material t = l.getBlock().getType();
-		return t == Material.SIGN || t == Material.SIGN_POST || t==Material.WALL_SIGN ? (Sign)l.getBlock().getState(): null;
+		return t == Material.SIGN || t == Material.LEGACY_SIGN_POST || t==Material.WALL_SIGN ? (Sign)l.getBlock().getState(): null;
 	}
 
 	public StatSign getStatSign(Location location) {

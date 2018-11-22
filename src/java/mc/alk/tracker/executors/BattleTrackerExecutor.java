@@ -6,8 +6,8 @@ import mc.alk.tracker.TrackerInterface;
 import mc.alk.tracker.objects.StatType;
 import mc.alk.v1r7.executors.CustomCommandExecutor;
 
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;

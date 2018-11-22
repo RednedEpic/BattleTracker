@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang.mutable.MutableBoolean;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 
 
 /**
@@ -150,7 +150,6 @@ public class Cache <Key, Value> {
 
 	/**
 	 * get a cache object using the key from the given param
-	 * @param type
 	 * @return
 	 */
 	public Value get(UniqueKey<Key> obj){
@@ -209,7 +208,6 @@ public class Cache <Key, Value> {
 
 	/**
 	 * Specify that a cache object is 'dirty' and needs to be saved to db
-	 * @param key
 	 */
 	public void setDirty(Key... keys) {
 		modified = true;
@@ -259,7 +257,7 @@ public class Cache <Key, Value> {
 	}
 	/**
 	 * Explicitly save
-	 * @param element
+
 	 */
 	public void save(Key key) {
 		List<UniqueKey<Key>> types = new ArrayList<UniqueKey<Key>>(1);

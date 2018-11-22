@@ -12,7 +12,7 @@ import mc.alk.tracker.util.Cache;
 import mc.alk.tracker.util.Cache.CacheObject;
 import mc.alk.tracker.util.Cache.CacheSerializer;
 
-import org.apache.commons.lang.mutable.MutableBoolean;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 
 public class VersusRecords implements CacheSerializer<List<String>,VersusRecord>{
 	String id;
@@ -34,7 +34,7 @@ public class VersusRecords implements CacheSerializer<List<String>,VersusRecord>
 			ids.add(id1); ids.add(id2);
 		}
 
-		@Override
+
 		public List<String> getKey() {return ids;}
 		static public List<String>getKey(String id, String oid){return Arrays.asList(new String[]{id,oid});}
 		public void incWin() {wins++;setDirty();}
@@ -66,7 +66,6 @@ public class VersusRecords implements CacheSerializer<List<String>,VersusRecord>
 			getIndRecord(oid).add(new WLTRecord(WLT.LOSS));
 	}
 
-
 	public void addTie(String oid) {
 		totals.get(VersusRecord.getKey(id, oid)).incTies();
 		if (saveIndividualRecord)
@@ -77,7 +76,6 @@ public class VersusRecords implements CacheSerializer<List<String>,VersusRecord>
 		return totals.get(new ArrayList<String>(VersusRecord.getKey(id, opponentId)));
 	}
 
-	@Override
 	public VersusRecord load(List<String> key, MutableBoolean dirty, Object... varArgs) {
 		VersusRecord or = sql.getVersusRecord(key.get(0), key.get(1));
 		if (or != null){
@@ -90,7 +88,6 @@ public class VersusRecords implements CacheSerializer<List<String>,VersusRecord>
 		return or;
 	}
 
-	@Override
 	public void save(List<VersusRecord> types) {
 		sql.realsaveVersusRecords(types);
 		sql.saveIndividualRecords(id, ind_records);

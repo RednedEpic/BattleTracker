@@ -9,6 +9,7 @@ import mc.alk.tracker.ranking.EloCalculator;
 import mc.alk.tracker.util.Cache.CacheObject;
 import mc.alk.tracker.util.Util;
 import mc.alk.v1r7.util.Log;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.entity.Player;
 
 import java.util.Collections;
@@ -31,7 +32,6 @@ public abstract class Stat extends CacheObject<String,Stat>{
 	VersusRecords vRecord = null;
 	private TrackerImpl parent;
 
-	@Override
 	public String getKey() {
 		if (strid.length() > 32 )
 			Util.printStackTrace();
@@ -188,7 +188,7 @@ public abstract class Stat extends CacheObject<String,Stat>{
 	}
 
 	protected void createName(){
-		if (name != null && !name.isEmpty()) /// We have a specified name, dont use the naive append all players together
+		if (name != null && !StringUtils.isEmpty(name)) /// We have a specified name, dont use the naive append all players together
 			return;
 		//		System.out.println("name="+name);
 		StringBuilder sb = new StringBuilder();

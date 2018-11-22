@@ -12,7 +12,7 @@ import mc.alk.tracker.objects.SpecialType;
 import mc.alk.util.InventoryUtil;
 import mc.alk.v1r7.controllers.MC;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;

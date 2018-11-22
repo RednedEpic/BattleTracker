@@ -62,7 +62,7 @@ public class SignSerializer extends BaseConfig{
 			if (loc == null)
 				return false;
 			Material mat = loc.getWorld().getBlockAt(loc).getType();
-			if ( mat != Material.SIGN && mat != Material.SIGN_POST && mat != Material.WALL_SIGN)
+			if ( mat != Material.SIGN && mat != Material.LEGACY_SIGN_POST && mat != Material.WALL_SIGN)
 				return false;
 		} catch( Exception e){
 			return false;
