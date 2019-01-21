@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 import mc.alk.tracker.objects.SpecialType;
-import mc.alk.util.InventoryUtil;
+import mc.alk.battlebukkitlib.InventoryUtil;
 import mc.alk.v1r7.controllers.MC;
 
 import org.apache.commons.lang.StringUtils;
@@ -134,11 +134,14 @@ public class MessageController {
 		String node=null;
 		List<String> messages = null;
 		String wpnName = null;
-                List<String> wpnLore = null;
-		if (weapon != null){
-			node = "pvp."+ weapon.getType().name().toLowerCase();
+		List<String> wpnLore = null;
+		if (weapon != null) {
+			node = "pvp." + weapon.getType().name().toLowerCase();
 			wpnName = InventoryUtil.getCustomName(weapon);
-                        wpnLore = weapon.getItemMeta().getLore();
+
+			if (weapon.hasItemMeta() && weapon.getItemMeta().hasLore()) {
+				wpnLore = weapon.getItemMeta().getLore();
+			}
 			messages = config.getStringList(node);
 		}
 		if (messages == null || messages.isEmpty()){
